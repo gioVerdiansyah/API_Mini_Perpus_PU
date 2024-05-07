@@ -29,6 +29,7 @@ class BookController extends Controller
             DB::beginTransaction();
 
             $book = new Book;
+            $book->code = fake()->isbn13();
             $book->title = $request->judul_buku;
             $book->category = $request->jenis_buku;
             $book->publisher = $request->produksi;

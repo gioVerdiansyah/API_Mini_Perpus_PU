@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('rents', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->foreignUuid('customer_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('book_id')->constrained()->cascadeOnDelete();
             $table->date("rental_date");
             $table->date("return_date");
             $table->integer("total");

@@ -32,6 +32,7 @@ Route::middleware('auth.verifyAPI')->group(function () {
     Route::prefix('/get')->group(function () {
         Route::get("/customer", [CustomerController::class, 'getData']);
         Route::get("/book", [BookController::class, 'getData']);
+        Route::get("/rent", [RentController::class, 'getData']);
     });
 
     Route::prefix('/store')->group(function () {

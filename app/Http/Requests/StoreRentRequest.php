@@ -24,6 +24,8 @@ class StoreRentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'no_pelanggan' => 'required|exists:customers,number',
+            'kode_buku' => 'required|exists:books,code',
             "tanggal_sewa" => "required|date",
             "tanggal_pengembalian" => "required|date",
             "total" => "required|numeric",

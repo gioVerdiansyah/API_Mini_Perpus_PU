@@ -29,6 +29,7 @@ class CustomerController extends Controller
             DB::beginTransaction();
 
             $customer = new Customer;
+            $customer->number = fake()->randomNumber(4);
             $customer->name = $request->nama_pelanggan;
             $customer->address = $request->alamat;
             $customer->gender = $request->status;
