@@ -109,7 +109,7 @@ class CustomerController extends Controller
     {
         $book = Customer::all();
 
-        $pdf = Pdf::loadView('print.book', ['data' => $book]);
+        $pdf = Pdf::loadView('print.customer', ['data' => $book]);
         return $pdf->stream('BookPrint.pdf');
     }
 }

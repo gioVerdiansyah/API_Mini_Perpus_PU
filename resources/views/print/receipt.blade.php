@@ -62,7 +62,7 @@
         min-height: 50px;
     }
 
-    #invoice-POS #top .logo {
+    /* #invoice-POS #top .logo {
         height: 60px;
         width: 60px;
         background: url(http://127.0.0.1:8001/assets/book-logo.png) no-repeat;
@@ -70,7 +70,7 @@
         position: relative;
         left: 50%;
         transform: translateX(-50%);
-    }
+    } */
     #invoice-POS .info p{
         font-size: 10px;
     }

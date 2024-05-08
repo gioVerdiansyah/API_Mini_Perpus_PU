@@ -30,7 +30,7 @@ class RentController extends Controller
 
             DB::commit();
 
-            return HandleJsonResponseHelper::res("Successfully add new Rent");
+            return HandleJsonResponseHelper::res("Successfully add new Rent", $rent->id);
         } catch (\Exception $e) {
             DB::rollBack();
 
