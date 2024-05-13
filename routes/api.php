@@ -55,5 +55,6 @@ Route::middleware('auth.verifyAPI')->group(function () {
     Route::prefix('/destroy')->group(function () {
         Route::delete("/customer", [CustomerController::class, 'destroy']);
         Route::delete("/book", [BookController::class, 'destroy']);
+        Route::delete("/rent", [RentController::class, 'destroy']);
     });
 });

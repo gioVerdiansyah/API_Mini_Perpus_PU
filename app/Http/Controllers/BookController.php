@@ -13,10 +13,15 @@ use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
-    public function getData()
+    public function getData(Request $request)
     {
         try {
-            $books = Book::latest()->paginate(10);
+            $books = Book::latest()->paginate(2);
+
+            if($request->has('query')){
+                $searchQuery = $request->query('query');
+                $books = Book::orWhere('title', $searchQuery)->orWhere('code', 'LIKE', '%' . $searchQuery . '%')->orWhere('category', 'LIKE', '%' . $searchQuery . '%')->orWhere('publisher', 'LIKE', '%' . $searchQuery . '%')->paginate(2);
+            }
 
             return HandleJsonResponseHelper::res("Successfully get Data", $books);
         } catch (\Exception $e) {
@@ -101,7 +106,6 @@ class BookController extends Controller
             return HandleJsonResponseHelper::res("There is a error", $e->getMessage(), 500, false);
         }
     }
-
     public function print()
     {
         $book = Book::all();

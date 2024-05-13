@@ -14,10 +14,16 @@ use Illuminate\Support\Facades\DB;
 class CustomerController extends Controller
 {
 
-    public function getData()
+    public function getData(Request $request)
     {
         try {
-            $customers = Customer::latest()->paginate(1);
+            $customers = Customer::latest()->paginate(2);
+
+            if($request->has('query')){
+                $searchQuery = $request->query('query');
+                $customers = Customer::latest()->orWhere('number', $searchQuery)->orWhere('name', 'LIKE', '%' . $searchQuery . '%')->paginate(2);
+            }
+
             return HandleJsonResponseHelper::res("Successfully get data!", $customers, 200, true);
         } catch (\Exception $e) {
             return HandleJsonResponseHelper::res("There is a error", $e->getMessage(), 500, false);
@@ -104,7 +110,6 @@ class CustomerController extends Controller
             return HandleJsonResponseHelper::res("There is a error", $e->getMessage(), 500, false);
         }
     }
-
     public function print()
     {
         $book = Customer::all();
