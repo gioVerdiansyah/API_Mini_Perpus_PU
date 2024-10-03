@@ -16,11 +16,11 @@ class BookController extends Controller
     public function getData(Request $request)
     {
         try {
-            $books = Book::latest()->paginate(2);
+            $books = Book::latest()->paginate(5);
 
             if($request->has('query')){
                 $searchQuery = $request->query('query');
-                $books = Book::orWhere('title', $searchQuery)->orWhere('code', 'LIKE', '%' . $searchQuery . '%')->orWhere('category', 'LIKE', '%' . $searchQuery . '%')->orWhere('publisher', 'LIKE', '%' . $searchQuery . '%')->paginate(2);
+                $books = Book::orWhere('title', $searchQuery)->orWhere('code', 'LIKE', '%' . $searchQuery . '%')->orWhere('category', 'LIKE', '%' . $searchQuery . '%')->orWhere('publisher', 'LIKE', '%' . $searchQuery . '%')->paginate(5);
             }
 
             return HandleJsonResponseHelper::res("Successfully get Data", $books);

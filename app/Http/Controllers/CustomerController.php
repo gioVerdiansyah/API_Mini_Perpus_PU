@@ -17,11 +17,11 @@ class CustomerController extends Controller
     public function getData(Request $request)
     {
         try {
-            $customers = Customer::latest()->paginate(2);
+            $customers = Customer::latest()->paginate(5);
 
             if($request->has('query')){
                 $searchQuery = $request->query('query');
-                $customers = Customer::latest()->orWhere('number', $searchQuery)->orWhere('name', 'LIKE', '%' . $searchQuery . '%')->paginate(2);
+                $customers = Customer::latest()->orWhere('number', $searchQuery)->orWhere('name', 'LIKE', '%' . $searchQuery . '%')->paginate(5);
             }
 
             return HandleJsonResponseHelper::res("Successfully get data!", $customers, 200, true);

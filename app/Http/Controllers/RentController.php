@@ -41,7 +41,7 @@ class RentController extends Controller
     public function getData(Request $request)
     {
         try {
-            $rent = Rent::with(['customer', 'book'])->latest()->paginate(2);
+            $rent = Rent::with(['customer', 'book'])->latest()->paginate(5);
             $customer = Customer::select(['number', 'name'])->get()->toArray();
             $book = Book::select(['code', 'title'])->get()->toArray();
 
@@ -49,7 +49,7 @@ class RentController extends Controller
                 $searchQuery = $request->query('query');
                 $books = Book::where('title', 'LIKE', '%' . $searchQuery . '%')->pluck('id');
                 $customers = Customer::where('name', 'LIKE', '%' . $searchQuery . '%')->pluck('id');
-                $rent = Rent::with(['customer', 'book'])->orWhereIn('book_id', $books)->orWhereIn('customer_id', $customers)->paginate(2);
+                $rent = Rent::with(['customer', 'book'])->orWhereIn('book_id', $books)->orWhereIn('customer_id', $customers)->paginate(5);
             }
 
             return HandleJsonResponseHelper::res("Successfully get data", ['rent' => $rent, 'customerAndBook' => ['customer' => $customer, 'book' => $book]]);
